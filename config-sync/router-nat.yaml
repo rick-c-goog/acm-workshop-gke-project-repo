@@ -1,0 +1,18 @@
+apiVersion: compute.cnrm.cloud.google.com/v1beta1
+kind: ComputeRouterNAT
+metadata:
+  name: gke
+  namespace: acm-workshop-425-gke
+  annotations:
+    config.kubernetes.io/depends-on: compute.cnrm.cloud.google.com/namespaces/acm-workshop-425-gke/ComputeSubnetwork/gke,compute.cnrm.cloud.google.com/namespaces/acm-workshop-425-gke/ComputeRouter/gke
+spec:
+  natIpAllocateOption: AUTO_ONLY
+  region: us-east4
+  routerRef:
+    name: gke
+  sourceSubnetworkIpRangesToNat: LIST_OF_SUBNETWORKS
+  subnetwork:
+  - subnetworkRef:
+      name: gke
+    sourceIpRangesToNat:
+    - ALL_IP_RANGES
